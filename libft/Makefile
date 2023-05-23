@@ -1,44 +1,104 @@
-SRC			= ft_memset ft_bzero ft_memcpy ft_memmove ft_memchr ft_memcmp ft_strlen ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_toupper ft_tolower ft_strchr ft_strrchr ft_strncmp ft_strlcpy ft_strnstr ft_atoi ft_calloc ft_strdup ft_substr ft_strtrim ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd ft_strjoin ft_strlcat ft_split
-B_SRC		= ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/22 14:38:28 by mkaruvan          #+#    #+#              #
+#    Updated: 2023/05/23 07:21:18 by mkaruvan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS		= $(addsuffix .c, ${SRC})
+NAME        := libft.a
 
-B_SRCS		= $(addsuffix _bonus.c, ${B_SRC})
+CC          := gcc
 
-HEAD		= ./includes/ 
+CFLAGS      := -Wall -Wextra -Werror -g3 -I includes
 
-OBJS		= ${SRCS:.c=.o}
+RM          := rm -f
 
-B_OBJS		= ${B_SRCS:.c=.o}
+AR          := ar rcs
 
-NAME		= libft.a
+SRCS        := srcs/ft_strmapi.c \
+               srcs/ft_strjoin.c \
+               srcs/ft_strlcat.c \
+               srcs/ft_strlcpy.c \
+               srcs/ft_substr.c \
+               srcs/ft_strdup.c \
+               srcs/ft_striteri.c \
+               srcs/ft_strtrim.c \
+               srcs/ft_split.c \
+               srcs/ft_isprint.c \
+               srcs/ft_isalnum.c \
+               srcs/ft_isalpha.c \
+               srcs/ft_isdigit.c \
+               srcs/ft_isascii.c \
+               srcs/ft_bzero.c \
+               srcs/ft_calloc.c \
+               srcs/ft_strrchr.c \
+               srcs/ft_strchr.c \
+               srcs/ft_strlen.c \
+               srcs/ft_strnstr.c \
+               srcs/ft_strncmp.c \
+               srcs/ft_putnbr_fd.c \
+               srcs/ft_putstr_fd.c \
+               srcs/ft_putchar_fd.c \
+               srcs/ft_putendl_fd.c \
+               srcs/ft_tolower.c \
+               srcs/ft_atoi.c \
+               srcs/ft_itoa.c \
+               srcs/ft_toupper.c \
+               srcs/ft_memset.c \
+               srcs/ft_memmove.c \
+               srcs/ft_memcpy.c \
+               srcs/ft_memchr.c \
+               srcs/ft_memcmp.c \
+               srcs/get_next_line.c \
 
-CC			= gcc
-RM			= rm -f
-AR			= ar rc
-RN			= ranlib
+SRC_BONUS   := bonus/ft_lstnew.c \
+               bonus/ft_lstadd_front.c \
+               bonus/ft_lstsize.c \
+               bonus/ft_lstlast.c \
+               bonus/ft_lstadd_back.c \
+               bonus/ft_lstdelone.c \
+               bonus/ft_lstclear.c \
+               bonus/ft_lstiter.c \
+               bonus/ft_lstmap.c \
 
-CFLAGS		= -Wall -Wextra -Werror
+OBJS        := $(SRCS:.c=.o)
 
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+OBJS_BONUS  := $(SRC_BONUS:.c=.o)
 
-$(NAME):	${OBJS}
+CLR_RMV     := \033[0m
+RED         := \033[1;31m
+GREEN       := \033[1;32m
+YELLOW      := \033[1;33m
+BLUE        := \033[1;34m
+CYAN        := \033[1;36m
+
+${NAME}:	${OBJS}
+			@echo "$(GREEN) Creating archive file ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			${AR} ${NAME} ${OBJS}
-			${RN} ${NAME}
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-bonus:		${B_OBJS}
-			${AR} ${NAME} ${B_OBJS}
-			${RN} ${NAME}
+all:		${NAME}
 
-all:		$(NAME)
+bonus:		${OBJS} ${OBJS_BONUS}
+			@echo "$(GREEN) Creating archive file with bonus ${CLR_RMV} ${YELLOW}$(NAME)${CLR_RMV}..."
+			${AR} ${NAME} ${OBJS} ${OBJS_BONUS}
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 clean:
-			${RM} ${OBJS} ${B_OBJS}
+			@ ${RM} $(OBJS) $(OBJS_BONUS)
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
 fclean:		clean
-			${RM} $(NAME)
+			@ ${RM} ${NAME}
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
-re:			fclean all
+re:			fclean bonus
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all clean fclean re
+
+

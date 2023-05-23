@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "../libft/includes/libft.h"
 #define WIN_WIDTH 1000
 #define WIN_HEIGHT 1000
 #define PI 3.14159265359
