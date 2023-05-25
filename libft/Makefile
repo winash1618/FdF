@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 14:38:28 by mkaruvan          #+#    #+#              #
-#    Updated: 2023/05/23 07:21:18 by mkaruvan         ###   ########.fr        #
+#    Updated: 2023/05/24 06:52:31 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,9 +66,20 @@ SRC_BONUS   := bonus/ft_lstnew.c \
                bonus/ft_lstiter.c \
                bonus/ft_lstmap.c \
 
+SRC_DLST    := dlst/ft_dlstnew.c \
+               dlst/ft_dlstadd_front.c \
+               dlst/ft_dlstadd_back.c \
+               dlst/ft_dlstsize.c \
+               dlst/ft_dlstlast.c \
+               dlst/ft_dlstclear.c \
+               dlst/ft_dlstiter.c \
+               dlst/ft_dlstmap.c \
+
 OBJS        := $(SRCS:.c=.o)
 
 OBJS_BONUS  := $(SRC_BONUS:.c=.o)
+
+OBJS_DLST   := $(SRC_DLST:.c=.o)
 
 CLR_RMV     := \033[0m
 RED         := \033[1;31m
@@ -77,24 +88,23 @@ YELLOW      := \033[1;33m
 BLUE        := \033[1;34m
 CYAN        := \033[1;36m
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} ${OBJS_BONUS} ${OBJS_DLST}
 			@echo "$(GREEN) Creating archive file ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			${AR} ${NAME} ${OBJS}
+			${AR} ${NAME} ${OBJS} ${OBJS_BONUS} ${OBJS_DLST}
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 all:		${NAME}
 
-bonus:		${OBJS} ${OBJS_BONUS}
 			@echo "$(GREEN) Creating archive file with bonus ${CLR_RMV} ${YELLOW}$(NAME)${CLR_RMV}..."
 			${AR} ${NAME} ${OBJS} ${OBJS_BONUS}
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 clean:
-			@ ${RM} $(OBJS) $(OBJS_BONUS)
+			@ ${RM} $(OBJS) $(OBJS_BONUS) $(OBJS_DLST)
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
 fclean:		clean
-			@ ${RM} ${NAME}
+			@ ${RM} ${NAME} 
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
 re:			fclean bonus

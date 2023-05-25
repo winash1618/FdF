@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 07:27:42 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/23 08:22:35 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:28:14 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ char	*ft_reader(int fd, char *s, size_t bf)
 			return (NULL);
 		}
 		str[i] = '\0';
-		printf("str: %p, %p\n", str, s);
 		s = ft_strjoin(s, str);
-		printf("s: %s\n", str);
 	}
 	if (s && s[0] == '\0')
 	{
