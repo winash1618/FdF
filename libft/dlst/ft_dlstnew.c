@@ -10,5 +10,9 @@ t_dlist	*ft_dlstnew(void *content)
 	new->content = content;
 	new->next = NULL;
 	new->down = NULL;
+	new->x = 0;
+	new->y = 0;
+	new->z = 0;
+	new->c = 0;
 	return (new);
 }

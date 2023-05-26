@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 12:11:30 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/24 06:49:08 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:28:07 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,17 @@ typedef struct s_list
 typedef struct s_dlist
 {
 	void			*content;
+	double			x;
+	double			y;
+	double			z;
+	int				c;	
 	struct s_dlist	*next;
 	struct s_dlist	*down;
 }	t_dlist;
+
+/***************************************************************************/
+/**************************** Mandatory Part *******************************/
+/***************************************************************************/
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -67,6 +75,11 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
+
+/**************************************************************************/
+/***************************** Bonus Part *********************************/
+/**************************************************************************/
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **olst, t_list *nlst);
 int		ft_lstsize(t_list *lst);
@@ -76,6 +89,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/**************************************************************************/
+/************************* Double Linked List *****************************/
+/**************************************************************************/
+
 t_dlist	*ft_dlstnew(void *content);
 void	ft_dlstadd_front(t_dlist **olst, t_dlist *nlst);
 int		ft_dlstsize(t_dlist *lst);
@@ -85,5 +103,13 @@ void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
 void	ft_dlstclear(t_dlist **lst, void (*del)(void*));
 void	ft_dlstiter(t_dlist *lst, void (*f)(void *));
 t_dlist	*ft_dlstmap(t_dlist *lst, void *(*f)(void *), void (*del)(void *));
+
+/**************************************************************************/
+/********************************* Extras *********************************/
+/**************************************************************************/
+
 int		get_next_line(int fd, char **line);
+int		ft_atoi_base(const char *s, int c);
+int		ft_isspace(int c);
+
 #endif
