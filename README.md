@@ -6,5 +6,12 @@
 - http://www.cse.iitm.ac.in/~vplab/courses/CG/PDF/TRANS_2D.pdf There is trans_3D also just try and change the links.
 
 
+## How to install X11 library
 - sudo apt-get install libxext-dev
 - sudo apt-get install libx11-dev
+
+
+## How to run a libft function with main inside it
+- cd libft && make
+- gcc dlst/ft_dlstadd_back.c -I includes 
+- ./a.out

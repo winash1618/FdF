@@ -2,9 +2,8 @@
 
 int main(int argc, char **argv)
 {
-	t_fdf *fdf;
-	t_dlist *map;
-	int i = 0;
+	t_fdf	*fdf;
+	t_dlist	*map;
 
 	if (argc != 2)
 	{

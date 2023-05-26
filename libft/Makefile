@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 14:38:28 by mkaruvan          #+#    #+#              #
-#    Updated: 2023/05/24 06:52:31 by mkaruvan         ###   ########.fr        #
+#    Updated: 2023/05/25 06:46:33 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ SRC_BONUS   := bonus/ft_lstnew.c \
                bonus/ft_lstmap.c \
 
 SRC_DLST    := dlst/ft_dlstnew.c \
-               dlst/ft_dlstadd_front.c \
+               dlst/ft_dlstadd_down.c \
                dlst/ft_dlstadd_back.c \
                dlst/ft_dlstsize.c \
                dlst/ft_dlstlast.c \

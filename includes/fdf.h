@@ -17,6 +17,6 @@ typedef struct	s_fdf
 	void	*win;
 }				t_fdf;
 
-char **parse_map(char *file);
+t_dlist *parse_map(char *file);
 
 #endif
