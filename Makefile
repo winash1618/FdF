@@ -3,11 +3,11 @@ NAME        := fdf
 
 CC          := gcc
 
-FLAGS       := -Wall -Wextra -Werror 
+FLAGS       := -Wall -Wextra -Werror
 
 INCLUDES    := -I includes -I mlx
 
-SRCS        := srcs/main.c srcs/parse_map.c
+SRCS        := srcs/main.c srcs/parse_map.c srcs/map_utils.c srcs/mlx_utils.c
                           
 OBJS        := $(SRCS:.c=.o)
 
