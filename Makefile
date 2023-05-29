@@ -7,8 +7,9 @@ FLAGS       := -Wall -Wextra -Werror
 
 INCLUDES    := -I includes -I mlx
 
-SRCS        := srcs/main.c srcs/parse_map.c srcs/map_utils.c srcs/mlx_utils.c
-                          
+SRCS        := srcs/main.c srcs/parse_map.c srcs/map_utils.c srcs/mlx_utils.c \
+               srcs/draw_line.c srcs/map_modify.c
+
 OBJS        := $(SRCS:.c=.o)
 
 LIBFT       := libft/libft.a
