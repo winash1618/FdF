@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:34 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/26 09:06:15 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:17:49 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void print_map(t_dlist *head)
 			printf("[");
 			printf(GREEN" %.1f,"ANSI_RESET, tmp->x);
 			printf(BLUE" %.1f,"ANSI_RESET, tmp->y);
-			printf(RED" %.1f,"ANSI_RESET, tmp->z);
+			if (tmp->z > 0)
+				printf(RED" %.1f,"ANSI_RESET, tmp->z);
+			else
+				printf(GREEN" %.1f,"ANSI_RESET, tmp->z);
 			printf(CYAN" 0x%X"ANSI_RESET, tmp->c);
 			printf("] ");
 			tmp = tmp->next;
