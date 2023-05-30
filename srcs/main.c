@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:44 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/30 07:55:40 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:22:06 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,39 @@ void draw_map(t_fdf *fdf)
 	}
 }
 
+int key_press(int x, t_fdf *fdf)
+{
+	printf("key pressed: %d\n", x);
+	if (x == 53)
+		exit(0);
+	if (x == 126)
+		translate_map(fdf->map, 0, -10);
+	if (x == 125)
+		translate_map(fdf->map, 0, 10);
+	if (x == 123)
+		translate_map(fdf->map, -10, 0);
+	if (x == 124)
+		translate_map(fdf->map, 10, 0);
+	if (x == 13)
+		rotate_map_x(fdf->map, 0.1);
+	if (x == 1)
+		rotate_map_x(fdf->map, -0.1);
+	if (x == 0)
+		rotate_map_x(fdf->map, 0.1);
+	if (x == 2)
+		rotate_map_y(fdf->map, -0.1);
+	if (x == 31)
+		scale_map(fdf->map, 1.1);
+	if (x == 34)
+		scale_map(fdf->map, 0.9);
+	mlx_destroy_image(fdf->mlx->mlx, fdf->img->img);
+	fdf->img->img = mlx_new_image(fdf->mlx->mlx, IMG_WIDTH, IMG_HEIGHT);
+	draw_map(fdf);
+	print_map(fdf->map);
+	mlx_put_image_to_window(fdf->mlx->mlx, fdf->mlx->win, fdf->img->img, 0, 0);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_fdf	*fdf;
@@ -51,17 +84,12 @@ int main(int argc, char **argv)
 	fdf->img->img = mlx_new_image(fdf->mlx->mlx, IMG_WIDTH, IMG_HEIGHT);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
-	// draw_line(fdf, 100, 10, 200, 1000, 0x00FF0000);
 	init_map(fdf->map);
-	scale_map(fdf->map, 7);
-	// rotate_map_z(fdf->map, 45, 45, 0);
-	rotate_map_x(fdf->map, 35, 45, 0);
-	rotate_map_y(fdf->map, 45, 45, 0);
-	translate_map(fdf->map, 300, 300);
 	draw_map(fdf);
 	print_map(fdf->map);
 	my_mlx_pixel_put(fdf->img, 50, 50, 0x00FF0000);
 	mlx_put_image_to_window(fdf->mlx->mlx, fdf->mlx->win, fdf->img->img, 0, 0);
+	mlx_hook(fdf->mlx->win, 2, 0, key_press, fdf);
 	mlx_loop(fdf->mlx->mlx);
 	return (0);
 }

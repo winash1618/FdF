@@ -32,6 +32,7 @@ typedef struct	s_fdf
 	t_mlx		*mlx;
 	t_img		*img;
 	t_dlist		*map;
+
 }				t_fdf;
 
 /********************************************************************/
@@ -69,14 +70,12 @@ void 		draw_line(t_fdf *fdf, t_dlist *p0, t_dlist *p1);
 
 void		init_map(t_dlist *head);
 
-void		scale_map(t_dlist *head, int scale);
+void		scale_map(t_dlist *head, double scale);
 
 void		translate_map(t_dlist *head, int x, int y);
 
-void rotate_map_x(t_dlist *map, double x, double y, double z);
+void rotate_map_x(t_dlist *map, double rot_x);
 
-void rotate_map_y(t_dlist *map, double x, double y, double z);
-
-void rotate_map_z(t_dlist *map, double x, double y, double z);
+void rotate_map_y(t_dlist *map, double rot_y);
 
 #endif
