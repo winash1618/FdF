@@ -73,6 +73,10 @@ void		scale_map(t_dlist *head, int scale);
 
 void		translate_map(t_dlist *head, int x, int y);
 
-void		rotate_map(t_dlist *head, double x, double y, double z);
+void rotate_map_x(t_dlist *map, double x, double y, double z);
+
+void rotate_map_y(t_dlist *map, double x, double y, double z);
+
+void rotate_map_z(t_dlist *map, double x, double y, double z);
 
 #endif

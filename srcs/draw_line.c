@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:13:03 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/29 13:49:53 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/30 07:46:55 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void draw_line_low(t_fdf *fdf, t_dlist *p0, t_dlist *p1)
 		if (D > 0)
 		{
 			y = y + yi;
-			D = D + 2 * (dy - dx);
+			D = D - 2 * dx;
 		}
 		D = D + 2 * dy;
 	}
@@ -54,7 +54,7 @@ void draw_line_high(t_fdf *fdf, t_dlist *p0, t_dlist *p1)
 		if (D > 0)
 		{
 			x = x + xi;
-			D = D + 2 * (dx - dy);
+			D = D - 2 * dy;
 		}
 		D = D + 2 * dx;
 	}
@@ -62,18 +62,16 @@ void draw_line_high(t_fdf *fdf, t_dlist *p0, t_dlist *p1)
 
 void draw_line(t_fdf *fdf, t_dlist *p0, t_dlist *p1)
 {
-	int dx = p1->x - p0->x;
-	int dy = p1->y - p0->y;
-	if (abs(dx) > abs(dy))
+	if (fabs(p1->y - p0->y) < fabs(p1->x - p0->x))
 	{
-		if (p0->x > p1->x)
+		if (p0->x >= p1->x)
 			draw_line_low(fdf, p1, p0);
 		else
 			draw_line_low(fdf, p0, p1);
 	}
 	else
 	{
-		if (p0->y > p1->y)
+		if (p0->y >= p1->y)
 			draw_line_high(fdf, p1, p0);
 		else
 			draw_line_high(fdf, p0, p1);
