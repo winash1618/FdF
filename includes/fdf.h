@@ -61,9 +61,7 @@ void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 /*************************** draw_line.c ****************************/
 /********************************************************************/
 
-void		draw_line_x(t_fdf *fdf, t_dlist *p0, t_dlist *p1);
-
-void		draw_line_y(t_fdf *fdf, t_dlist *p0, t_dlist *p1);
+void 		draw_line(t_fdf *fdf, t_dlist *p0, t_dlist *p1);
 
 /*********************************************************************/
 /*************************** map_modify.c ****************************/
@@ -74,5 +72,7 @@ void		init_map(t_dlist *head);
 void		scale_map(t_dlist *head, int scale);
 
 void		translate_map(t_dlist *head, int x, int y);
+
+void		rotate_map(t_dlist *head, double x, double y, double z);
 
 #endif

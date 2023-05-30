@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:44 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/29 08:08:30 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:20:37 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void draw_map(t_fdf *fdf)
 		while (tmp)
 		{
 			if (tmp->next)
-				draw_line_x(fdf, tmp, tmp->next);
+				draw_line(fdf, tmp, tmp->next);
 			if (tmp->down)
-				draw_line_y(fdf, tmp, tmp->down);
+				draw_line(fdf, tmp, tmp->down);
 			tmp = tmp->next;
 		}
 		head = head->down;
@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 	init_map(fdf->map);
 	scale_map(fdf->map, 20);
 	translate_map(fdf->map, 100, 100);
+	rotate_map(fdf->map, 45, 45, 45);
 	draw_map(fdf);
 	print_map(fdf->map);
 	my_mlx_pixel_put(fdf->img, 50, 50, 0x00FF0000);
