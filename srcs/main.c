@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:44 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/30 16:22:06 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/31 08:26:06 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ void draw_map(t_fdf *fdf)
 		}
 		head = head->down;
 	}
+	// print_map(fdf->map);
+}
+
+void adjust_altitude(t_dlist *map, int alt)
+{
+	t_dlist *head;
+	t_dlist *tmp;
+
+	head = map;
+	while (head)
+	{
+		tmp = head;
+		while (tmp)
+		{
+			tmp->z += alt;
+			tmp = tmp->next;
+		}
+		head = head->down;
+	}
 }
 
 int key_press(int x, t_fdf *fdf)
@@ -51,17 +70,20 @@ int key_press(int x, t_fdf *fdf)
 	if (x == 1)
 		rotate_map_x(fdf->map, -0.1);
 	if (x == 0)
-		rotate_map_x(fdf->map, 0.1);
+		rotate_map_y(fdf->map, 0.1);
 	if (x == 2)
 		rotate_map_y(fdf->map, -0.1);
 	if (x == 31)
 		scale_map(fdf->map, 1.1);
 	if (x == 34)
 		scale_map(fdf->map, 0.9);
+	if (x == 35)
+		adjust_altitude(fdf->map, 1);
+	if (x == 37)
+		adjust_altitude(fdf->map, -1);
 	mlx_destroy_image(fdf->mlx->mlx, fdf->img->img);
 	fdf->img->img = mlx_new_image(fdf->mlx->mlx, IMG_WIDTH, IMG_HEIGHT);
 	draw_map(fdf);
-	print_map(fdf->map);
 	mlx_put_image_to_window(fdf->mlx->mlx, fdf->mlx->win, fdf->img->img, 0, 0);
 	return (0);
 }

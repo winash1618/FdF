@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:51 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/26 09:22:23 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/31 07:01:35 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void create_down_lst(t_dlist **olst, t_dlist *nlst)
 		nlst = nlst->next;
 	}
 }
-
 
 static void read_map(int fd, t_dlist **head)
 {

@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:12:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/30 16:31:03 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/05/31 08:26:14 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,92 @@ void translate_map(t_dlist *map, int x, int y)
 // 	}
 // }
 
+// void move_center_to_origin(t_dlist *map, t_dlist *center)
+// {
+// 	int min_x;
+// 	int min_y;
+
+// 	min_x = center->x;
+// 	min_y = center->y;
+// 	t_dlist *head;
+// 	t_dlist *tmp;
+
+// 	head = map;
+// 	while (head)
+// 	{
+// 		tmp = head;
+// 		while (tmp)
+// 		{
+// 			tmp->x -= min_x;
+// 			tmp->y -= min_y;
+// 			tmp = tmp->next;
+// 		}
+// 		head = head->down;
+// 	}
+// }
+
+// void move_origin_to_center(t_dlist *map, t_dlist *center)
+// {
+// 	int min_x;
+// 	int min_y;
+
+// 	min_x = center->x;
+// 	min_y = center->y;
+// 	t_dlist *head;
+// 	t_dlist *tmp;
+	
+// 	head = map;
+// 	while (head)
+// 	{
+// 		tmp = head;
+// 		while (tmp)
+// 		{
+// 			tmp->x += min_x;
+// 			tmp->y += min_y;
+// 			tmp = tmp->next;
+// 		}
+// 		head = head->down;
+// 	}
+// }
+
+// t_dlist *find_center(t_dlist *map)
+// {
+// 	int x;
+// 	int y;
+
+// 	x = 0;
+// 	y = 0;
+// 	t_dlist *head;
+// 	head = map;
+// 	while (head)
+// 	{
+// 		x++;
+// 		head = head->next;
+// 	}
+// 	head = map;
+// 	while (head)
+// 	{
+// 		y++;
+// 		head = head->down;
+// 	}
+// 	x /= 2;
+// 	y /= 2;
+// 	int i = 0;
+// 	head = map;
+// 	while (i < x)
+// 	{
+// 		head = head->next;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < y)
+// 	{
+// 		head = head->down;
+// 		i++;
+// 	}
+// 	return (head);
+// }
+
 void rotate_map_x(t_dlist *map, double rot_x)
 {
 	t_dlist *head;
@@ -135,6 +221,8 @@ void rotate_map_x(t_dlist *map, double rot_x)
 	double z1;
 	
 	head = map;
+	// t_dlist *center = find_center(map);
+	// move_center_to_origin(map, center);
 	double a = cos(rot_x / 2);
 	double b = sin(rot_x / 2);
 	while (head)
@@ -152,6 +240,7 @@ void rotate_map_x(t_dlist *map, double rot_x)
 		}
 		head = head->down;
 	}
+	// move_origin_to_center(map, center);
 }
 
 void rotate_map_y(t_dlist *map, double rot_x)
@@ -163,6 +252,8 @@ void rotate_map_y(t_dlist *map, double rot_x)
 	double z1;
 	
 	head = map;
+	// t_dlist *center = find_center(map);
+	// move_center_to_origin(map, center);
 	double a = cos(rot_x / 2);
 	double b = sin(rot_x / 2);
 	while (head)
@@ -180,4 +271,5 @@ void rotate_map_y(t_dlist *map, double rot_x)
 		}
 		head = head->down;
 	}
+	// move_origin_to_center(map, center);
 }
