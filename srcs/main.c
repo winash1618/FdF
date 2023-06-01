@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:18:44 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/31 08:26:06 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/06/01 07:52:46 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,6 @@ void draw_map(t_fdf *fdf)
 		head = head->down;
 	}
 	// print_map(fdf->map);
-}
-
-void adjust_altitude(t_dlist *map, int alt)
-{
-	t_dlist *head;
-	t_dlist *tmp;
-
-	head = map;
-	while (head)
-	{
-		tmp = head;
-		while (tmp)
-		{
-			tmp->z += alt;
-			tmp = tmp->next;
-		}
-		head = head->down;
-	}
 }
 
 int key_press(int x, t_fdf *fdf)

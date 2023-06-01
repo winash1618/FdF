@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:12:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2023/05/31 08:26:14 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2023/06/01 07:52:34 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ void scale_map(t_dlist *map, double scale)
 		{
 			tmp->x *= scale;
 			tmp->y *= scale;
+			// tmp->z *= scale;
+			tmp = tmp->next;
+		}
+		head = head->down;
+	}
+}
+
+void adjust_altitude(t_dlist *map, double height)
+{
+	t_dlist *head;
+	t_dlist *tmp;
+
+	head = map;
+	while (head)
+	{
+		tmp = head;
+		while (tmp)
+		{
+			tmp->z += height;
 			tmp = tmp->next;
 		}
 		head = head->down;
@@ -126,91 +145,31 @@ void translate_map(t_dlist *map, int x, int y)
 // 	}
 // }
 
-// void move_center_to_origin(t_dlist *map, t_dlist *center)
-// {
-// 	int min_x;
-// 	int min_y;
+void move_to_center(t_dlist *map, t_dlist head_old)
+{
+	t_dlist *head;
+	t_dlist *tmp;
+	double x;
+	double y;
+	double z;
 
-// 	min_x = center->x;
-// 	min_y = center->y;
-// 	t_dlist *head;
-// 	t_dlist *tmp;
-
-// 	head = map;
-// 	while (head)
-// 	{
-// 		tmp = head;
-// 		while (tmp)
-// 		{
-// 			tmp->x -= min_x;
-// 			tmp->y -= min_y;
-// 			tmp = tmp->next;
-// 		}
-// 		head = head->down;
-// 	}
-// }
-
-// void move_origin_to_center(t_dlist *map, t_dlist *center)
-// {
-// 	int min_x;
-// 	int min_y;
-
-// 	min_x = center->x;
-// 	min_y = center->y;
-// 	t_dlist *head;
-// 	t_dlist *tmp;
-	
-// 	head = map;
-// 	while (head)
-// 	{
-// 		tmp = head;
-// 		while (tmp)
-// 		{
-// 			tmp->x += min_x;
-// 			tmp->y += min_y;
-// 			tmp = tmp->next;
-// 		}
-// 		head = head->down;
-// 	}
-// }
-
-// t_dlist *find_center(t_dlist *map)
-// {
-// 	int x;
-// 	int y;
-
-// 	x = 0;
-// 	y = 0;
-// 	t_dlist *head;
-// 	head = map;
-// 	while (head)
-// 	{
-// 		x++;
-// 		head = head->next;
-// 	}
-// 	head = map;
-// 	while (head)
-// 	{
-// 		y++;
-// 		head = head->down;
-// 	}
-// 	x /= 2;
-// 	y /= 2;
-// 	int i = 0;
-// 	head = map;
-// 	while (i < x)
-// 	{
-// 		head = head->next;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < y)
-// 	{
-// 		head = head->down;
-// 		i++;
-// 	}
-// 	return (head);
-// }
+	head = map;
+	x = head->x - head_old.x;
+	y = head->y - head_old.y;
+	z = head->z - head_old.z;
+	while (head)
+	{
+		tmp = head;
+		while (tmp)
+		{
+			tmp->x = tmp->x - x;
+			tmp->y = tmp->y - y;
+			tmp->z = tmp->z - z;
+			tmp = tmp->next;
+		}
+		head = head->down;
+	}
+}
 
 void rotate_map_x(t_dlist *map, double rot_x)
 {
@@ -221,10 +180,9 @@ void rotate_map_x(t_dlist *map, double rot_x)
 	double z1;
 	
 	head = map;
-	// t_dlist *center = find_center(map);
-	// move_center_to_origin(map, center);
 	double a = cos(rot_x / 2);
 	double b = sin(rot_x / 2);
+	t_dlist head_old = *head;
 	while (head)
 	{
 		tmp = head;
@@ -240,10 +198,10 @@ void rotate_map_x(t_dlist *map, double rot_x)
 		}
 		head = head->down;
 	}
-	// move_origin_to_center(map, center);
+	move_to_center(map, head_old);
 }
 
-void rotate_map_y(t_dlist *map, double rot_x)
+void rotate_map_y(t_dlist *map, double rot_y)
 {
 	t_dlist *head;
 	t_dlist *tmp;
@@ -252,10 +210,9 @@ void rotate_map_y(t_dlist *map, double rot_x)
 	double z1;
 	
 	head = map;
-	// t_dlist *center = find_center(map);
-	// move_center_to_origin(map, center);
-	double a = cos(rot_x / 2);
-	double b = sin(rot_x / 2);
+	double a = cos(rot_y / 2);
+	double b = sin(rot_y / 2);
+	t_dlist head_old = *head;
 	while (head)
 	{
 		tmp = head;
@@ -271,5 +228,35 @@ void rotate_map_y(t_dlist *map, double rot_x)
 		}
 		head = head->down;
 	}
-	// move_origin_to_center(map, center);
+	move_to_center(map, head_old);
+}
+
+void rotate_map_z(t_dlist *map, double rot_z)
+{
+	t_dlist *head;
+	t_dlist *tmp;
+	double x1;
+	double y1;
+	double z1;
+	
+	head = map;
+	double a = cos(rot_z / 2);
+	double b = sin(rot_z / 2);
+	t_dlist head_old = *head;
+	while (head)
+	{
+		tmp = head;
+		while (tmp)
+		{
+			x1 = tmp->x;
+			y1 = tmp->y;
+			z1 = tmp->z;
+			tmp->x = (a * a - b * b) * x1 - (2 * a * b) * y1;
+			tmp->y = (2 * a * b) * x1 + (a * a - b * b) * y1;
+			tmp->z = z1;
+			tmp = tmp->next;
+		}
+		head = head->down;
+	}
+	move_to_center(map, head_old);
 }
